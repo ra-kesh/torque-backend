@@ -11,6 +11,7 @@ import likedVideosRoutes from "./routes/likedVideosRoutes.js";
 import userDataRoutes from "./routes/userDataRoutes.js";
 import watchLaterRoutes from "./routes/watchLaterRoutes.js";
 import unfinishedVideoRoutes from "./routes/unfinishedVideoRoutes.js";
+import playListRoutes from "./routes/playListRoutes.js";
 
 // import { fillVideosCollection } from "./models/videoModel.js";
 
@@ -53,6 +54,7 @@ app.use("/api/likedvideos", likedVideosRoutes);
 app.use("/api/userdata", userDataRoutes);
 app.use("/api/watchlater", watchLaterRoutes);
 app.use("/api/unfinished", unfinishedVideoRoutes);
+app.use("/api/playlists", playListRoutes);
 
 // error Handellers
 app.use(notFoundMiddleware);

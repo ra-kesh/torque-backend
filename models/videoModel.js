@@ -23,15 +23,8 @@ const VideoSchema = new mongoose.Schema(
     playing: {
       type: Boolean,
     },
-    isUnfinished: {
-      type: Boolean,
-    },
-    elapsedTime: {
-      type: Number,
-    },
-    remainingTime: {
-      type: Number,
-    },
+    views: Number,
+    likes: Number,
   },
   { timestamps: true }
 );

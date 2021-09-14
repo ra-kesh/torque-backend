@@ -4,6 +4,7 @@ import { Histories } from "../models/historyModel.js";
 import { LikedVideos } from "../models/likedVideosModel.js";
 import { WatchLaters } from "../models/watchLaterModel.js";
 import { UnfinishedVideos } from "../models/unfinishedVideosModel.js";
+import { PlayLists } from "../models/playListModel.js";
 const router = express.Router();
 
 router.get(
@@ -16,11 +17,13 @@ router.get(
       likedVideosList,
       watchLaterVideosList,
       unfinishedVideosList,
+      allPlayLists,
     ] = await Promise.all([
-      Histories.findById(userId),
+      Histories.findById(userId).populate("historyVideos.video"),
       LikedVideos.findById(userId),
       WatchLaters.findById(userId),
       UnfinishedVideos.findById(userId),
+      PlayLists.find({ createdBy: userId }),
     ]);
 
     res.json({
@@ -34,6 +37,7 @@ router.get(
         watchLaterVideos: watchLaterVideosList
           ? watchLaterVideosList.watchLaterVideos
           : [],
+        allPlayLists: allPlayLists,
       },
     });
   })

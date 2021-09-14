@@ -5,20 +5,23 @@ import { PlayLists } from "../models/playListModel.js";
 
 export const getAllPlayListsOfUser = expressAsyncHandler(async (req, res) => {
   const { userId } = req.params;
-  let allPlayListsOfUser = await PlayLists.find({ createdBy: userId });
+  let allPlayListsOfUser = await PlayLists.find({ createdBy: userId }).populate(
+    "playListVideos"
+  );
   res.status(200).json({ success: true, allPlayListsOfUser });
 });
 
 export const addNewPLayListName = expressAsyncHandler(async (req, res) => {
-  const { userId } = req.params;
-  const { playListName } = req.body;
+  // const { userId } = req.params;
+  const { createdBy, playListName, playListVideos } = req.body;
 
   const newPlayList = new PlayLists({
-    createdBy: userId,
+    createdBy,
     playListName,
+    playListVideos,
   });
   await newPlayList.save();
-  res.status(200).json({ success: true, data: newPlayList });
+  res.status(200).json({ success: true, playList: newPlayList });
 });
 
 export const getSinglePlaylist = expressAsyncHandler(async (req, res) => {

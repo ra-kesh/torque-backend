@@ -12,7 +12,6 @@ export const getAllPlayListsOfUser = expressAsyncHandler(async (req, res) => {
 });
 
 export const addNewPLayListName = expressAsyncHandler(async (req, res) => {
-  // const { userId } = req.params;
   const { createdBy, playListName, playListVideos } = req.body;
 
   const newPlayList = new PlayLists({

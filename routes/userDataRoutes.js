@@ -19,7 +19,8 @@ router.get(
       unfinishedVideosList,
       allPlayLists,
     ] = await Promise.all([
-      Histories.findById(userId).populate("historyVideos.video"),
+      Histories.findById(userId),
+      // .populate("historyVideos.video"),
       LikedVideos.findById(userId),
       WatchLaters.findById(userId),
       UnfinishedVideos.findById(userId),
